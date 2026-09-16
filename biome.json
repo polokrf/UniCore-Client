@@ -22,12 +22,33 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style":{
+        "useImportType":"off"
+      },
+      "correctness":{
+        "noUnusedImports":"off",
+        "noChildrenProp":"off",
+        "noUnusedFunctionParameters":"off"
+      },
+      "complexity":{
+       "noUselessUndefinedInitialization":"off"
+      },
+      "suspicious":{
+
+      },
+      "a11y":{
+        "noLabelWithoutControl":"off"
+      }
     },
     "domains": {
       "next": "recommended",
       "react": "recommended"
     }
+    
+
+   
+    
   },
   "assist": {
     "actions": {
