@@ -1,9 +1,19 @@
+'use client'
 import { INavLink } from '@/type/header.type';
 import React from 'react';
 import Link from 'next/link';
+
+import { useGetMe, useLogout } from '@/hooks/auth.hook';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from '@/components/ui/toast';
 import { Button } from '@/components/ui/button';
 
+
 const Header = () => {
+
+ const { data: me } = useGetMe();
+ const { mutate: logout } = useLogout();
+ const queryClient = useQueryClient();
   
   const navLink:INavLink[] =[
     {name:'Home',path:'/'},
@@ -11,6 +21,28 @@ const Header = () => {
     {name:'Contact',path:'/contact'},
 
   ]
+
+   
+   const handleLogout = () => {
+     logout(undefined, {
+       onSuccess: res => {
+         toast.add({
+           title: 'Tata',
+           description: 'Logged out successfully',
+           type: 'success',
+         });
+         queryClient.removeQueries({ queryKey: ['user'] });
+       },
+       onError: error => {
+         console.log(error.message);
+         toast.add({
+           title: 'Logout failed',
+           description: 'Something Went Wrong',
+           type: 'error',
+         });
+       },
+     });
+   };
   return (
     <header className=" py-5 px-4 bg-accent shadow-sm flex justify-between items-center gap-3">
       <div></div>
@@ -23,10 +55,14 @@ const Header = () => {
       </nav>
 
       <div>
-        <Button
-          nativeButton={false}
-          render={<Link href={'/login'}>Login</Link>}
-        ></Button>
+        {me ? (
+          <Button onClick={handleLogout}>Logout</Button>
+        ) : (
+          <Button
+            nativeButton={false}
+            render={<Link href={'/login'}>Login</Link>}
+          ></Button>
+        )}
       </div>
     </header>
   );

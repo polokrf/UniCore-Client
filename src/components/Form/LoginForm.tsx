@@ -11,6 +11,7 @@ import { toast } from '../ui/toast';
 import { useRouter } from 'next/navigation';
 import { Spinner } from '../ui/spinner';
 import { Eye, EyeClosed } from 'lucide-react';
+import { useQueryClient } from '@tanstack/react-query';
 
 
 
@@ -18,6 +19,7 @@ import { Eye, EyeClosed } from 'lucide-react';
 const LoginForm = () => {
 const {mutate:login,isPending:loginPending}=useLogin()
 const [show,setShow]=useState(false)
+const queryClient = useQueryClient()
 
  const route = useRouter()
 
@@ -42,7 +44,11 @@ const [show,setShow]=useState(false)
             type: 'success',
             description: 'login successfully',
           });
+            queryClient.invalidateQueries({
+             queryKey: ['user'],
+           });
           route.push('/');
+         
         },
         onError: err => {
           console.log(err.message);
@@ -116,7 +122,7 @@ const [show,setShow]=useState(false)
                   />
                   {inValid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
-                <div className=' absolute right-3 top-6'>
+                <div className=" absolute right-3 top-6">
                   <button className="" onClick={handleShow} type="button">
                     {show ? <EyeClosed size={12} /> : <Eye size={12} />}
                   </button>
