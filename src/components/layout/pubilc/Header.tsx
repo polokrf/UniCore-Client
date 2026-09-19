@@ -7,6 +7,7 @@ import { useGetMe, useLogout } from '@/hooks/auth.hook';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from '@/components/ui/toast';
 import { Button } from '@/components/ui/button';
+import { IUserRole } from '@/type/user.type';
 
 
 const Header = () => {
@@ -14,13 +15,27 @@ const Header = () => {
  const { data: me } = useGetMe();
  const { mutate: logout } = useLogout();
  const queryClient = useQueryClient();
-  
-  const navLink:INavLink[] =[
-    {name:'Home',path:'/'},
-    {name:'About',path:'/about'},
-    {name:'Contact',path:'/contact'},
 
-  ]
+ const role:IUserRole= me?.data?.role
+
+ const dashboardRoutes: Record<IUserRole, string> = {
+   ADMIN: '/dashboard/admin',
+   SUPER_ADMIN: '/dashboard/admin',
+   TEACHER: '/dashboard/teacher',
+   STUDENT: '/dashboard/student',
+   USER: '/',
+ };
+
+ const dashboardPath = role ? dashboardRoutes[role] : '/login';
+  
+  const navLink: INavLink[] = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+    ...(me?.data && role !== 'USER'
+      ? [{ name: 'Dashboard', path: dashboardPath }]
+      : []),
+  ];
 
    
    const handleLogout = () => {
