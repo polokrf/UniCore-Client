@@ -1,5 +1,5 @@
 import DepartmentDetails from '@/components/modules/info/department/DepartmentDetails';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const DepartmentDetailsPage =async ({params}:{
   params: Promise<{ id: string }>;
@@ -7,7 +7,9 @@ const DepartmentDetailsPage =async ({params}:{
 const id = (await params).id
   return (
     <div>
-      <DepartmentDetails id={id}/>
+      <Suspense fallback={<p>loading...</p>}>
+        <DepartmentDetails id={id} />
+      </Suspense>
     </div>
   );
 };

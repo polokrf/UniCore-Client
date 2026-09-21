@@ -9,12 +9,44 @@ export const adminRoutes:IRoutes = {
       url: adminPath,
       items: [
         {
+          title: 'Manage-Users',
+          url: `${adminPath}/users`,
+        },
+        {
           title: 'Approve-Teacher',
-          url: `${adminPath}/approve-teacher`,
+          url: `${adminPath}/approved-teacher`,
         },
         {
           title: 'Approve-Student',
-          url: `${adminPath}/approve-teacher`,
+          url: `${adminPath}/approved-student`,
+        },
+        {
+          title: 'Create-Department',
+          url: `${adminPath}/create-department`,
+        },
+        {
+          title: 'Create-Course',
+          url: `${adminPath}/create-course`,
+        },
+        {
+          title: 'Create-CourseOffering',
+          url: `${adminPath}/create-course-offering`,
+        },
+        {
+          title: 'Create-Semester',
+          url: `${adminPath}/create-semester`,
+        },
+        {
+          title: 'All-Enrollments',
+          url: `${adminPath}/enrollments`,
+        },
+        {
+          title: 'Class-Routine',
+          url: `${adminPath}/create-class-routine`,
+        },
+        {
+          title: 'All-Results',
+          url: `${adminPath}/results`,
         },
       ],
     },

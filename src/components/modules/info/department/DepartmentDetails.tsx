@@ -7,8 +7,6 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { useSingleGetDepartment } from '@/hooks/department.hook';
 import { TDepartment } from '@/type/depart.type';
 
-import { Pencil, Pin, Trash } from 'lucide-react';
-import Link from 'next/link';
 import React, { useState } from 'react';
 
 const DepartmentDetails = ({id}:{id:string}) => {
