@@ -1,18 +1,17 @@
 import AuthRoleGard from '@/components/auth/AuthRoleGard';
-import DashboardShell from '@/components/modules/dashboard/DashboardShell';
+import DashboardShell from '@/components/dashboard/DashboardShell';
 import React, { ReactNode } from 'react';
 
 const StudentDashboard = ({ children }: { children: ReactNode }) => {
   return (
     <div>
-      <AuthRoleGard roles={['STUDENT']}> 
+      <AuthRoleGard roles={['STUDENT']}>
         <DashboardShell userRole="STUDENT">
-          <div className=' px-4 py-5'> {children}</div>
+          <div className=" px-4 py-5"> {children}</div>
         </DashboardShell>
-        </AuthRoleGard>
+      </AuthRoleGard>
     </div>
   );
 };
 
 export default StudentDashboard;
-

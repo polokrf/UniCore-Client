@@ -1,7 +1,7 @@
 'use client'
 
 import { useGetMe } from '@/hooks/auth.hook';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { ReactNode, useEffect } from 'react';
 import AuthLoading from './AuthLoading';
 
@@ -9,8 +9,12 @@ import AuthLoading from './AuthLoading';
 const AuthGard = ({children}:{children:ReactNode}) => {
   const {data,isPending,isError}= useGetMe()
   const router =useRouter()
+  const path = usePathname()
+
+  const pathName = path === '/dashboard'
   
   const user = data?.data
+ 
   // console.log(data)
   
   useEffect(()=>{
@@ -22,12 +26,12 @@ const AuthGard = ({children}:{children:ReactNode}) => {
       router.replace('/login')
     }
 
-    if(user.role === 'USER'){
+    if(user?.role  === 'USER' && pathName){
       router.replace('/');
     }
 
 
-  },[isError,isPending,user,router])
+  },[isError,isPending,user,router,pathName])
    
 
   if(isPending){

@@ -5,3 +5,24 @@ export type IUserRole =
   | 'TEACHER'
   | 'STUDENT'
   | 'USER'
+
+
+  export type TUser = {
+    createdAt: string;
+    email: string;
+    firstName:string;
+    id:string;
+    image:string | null;
+    imagePublicId: string | null;
+    isActive:boolean;
+    isEmailVerified: boolean;
+    role:IUserRole;
+    updatedAt:string;
+  };
+
+  export type IUserResponse={
+    status:number,
+    success:boolean,
+    message:string,
+    data:TUser
+  }

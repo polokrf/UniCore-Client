@@ -1,4 +1,5 @@
 import { getMe, logout, userLogin, userRegister } from "@/api/auth.api";
+import { IUserResponse } from "@/type/user.type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useLogin =()=>{
@@ -20,7 +21,7 @@ export const useLogout = ()=>{
 }
 
 export const useGetMe =()=>{
-  return useQuery({
+  return useQuery<IUserResponse>({
     queryKey:['user'],
     queryFn:getMe,
     retry:false

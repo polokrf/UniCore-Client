@@ -12,11 +12,16 @@ import { IUserRole } from '@/type/user.type';
 
 const Header = () => {
 
- const { data: me } = useGetMe();
+ const { data: me , isLoading } = useGetMe();
  const { mutate: logout } = useLogout();
  const queryClient = useQueryClient();
 
- const role:IUserRole= me?.data?.role
+  if(isLoading){
+    return <p>Loading...</p>
+  }
+   
+
+ const role: IUserRole | undefined = me?.data.role;
 
  const dashboardRoutes: Record<IUserRole, string> = {
    ADMIN: '/dashboard/admin',
@@ -32,6 +37,7 @@ const Header = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
+   ...(me?.data ? [ {name:'Departments',path:"/chose-department"}] : []),
     ...(me?.data && role !== 'USER'
       ? [{ name: 'Dashboard', path: dashboardPath }]
       : []),

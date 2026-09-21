@@ -1,5 +1,6 @@
 import apiFetch from "@/lib/apiFetch"
 import { ILoginPayload, IRegisterPayload } from "@/type/auth.type"
+import { IUserResponse } from "@/type/user.type"
 
 export const userLogin=(payload:ILoginPayload)=>{
  return apiFetch('/api/auth/login',{method:'POST',body: payload})
@@ -10,7 +11,7 @@ export const userRegister=(payload:IRegisterPayload)=>{
 }
 
 export const getMe =()=>{
-  return apiFetch('/api/auth/profile');
+  return apiFetch<IUserResponse>('/api/auth/profile');
 }
 
 export const logout = ()=>{
