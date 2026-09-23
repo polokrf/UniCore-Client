@@ -1,56 +1,50 @@
-'use client'
+'use client';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ta } from 'zod/v4/locales';
-import { UserManageTable } from '../table/UserManageTable';
+import { UserManageTable } from './UserManageTable';
 import { ChangeEvent, Suspense, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { TUserQuery } from '@/type/admin.access.type';
+import { TUserQuery } from '@/type/addminAccess/admin.access.type';
 import { Input } from '@/components/ui/input';
 import useDebounced from '@/hooks/debounced';
+import { SkeletonText } from '@/components/layout/loading/SkeletonText';
 
 export function ManageUserTab() {
-
   const [tab, setTab] = useState<'ALL' | 'ACTIVE' | 'BLOCKED'>('ALL');
-  const [roleTab ,setRoleTab]=useState<'ALL' | 'STUDENT' | 'TEACHER' | 'USER'>('ALL')
-  const [search,setSearch]=useState('')
-  const [page,setPage]=useState(1)
+  const [roleTab, setRoleTab] = useState<
+    'ALL' | 'STUDENT' | 'TEACHER' | 'USER'
+  >('ALL');
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
 
   const StatusList = [
-    ['ALL','All'],
-    ['ACTIVE','Active'],
-    ['BLOCKED','Blocked'],
-  ]
+    ['ALL', 'All'],
+    ['ACTIVE', 'Active'],
+    ['BLOCKED', 'Blocked'],
+  ];
 
   const roleList = [
-    ['ALL','All'],
-    ['STUDENT','Student'],
-    ['TEACHER','Teacher'],
-    ['USER','User']
-  ]
+    ['ALL', 'All'],
+    ['STUDENT', 'Student'],
+    ['TEACHER', 'Teacher'],
+    ['USER', 'User'],
+  ];
 
-
-  const debouncedValue = useDebounced(search)
-   const handleSearch = (
-     e: ChangeEvent<HTMLInputElement, HTMLInputElement>,
-   ) => {
-
-      console.log('INPUT:', e.target.value);
-      const searchValue = e.target.value;
-     setSearch(searchValue.trim());
-     setPage(1);
-   };
-
+  const debouncedValue = useDebounced(search);
+  const handleSearch = (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+    console.log('INPUT:', e.target.value);
+    const searchValue = e.target.value;
+    setSearch(searchValue.trim());
+    setPage(1);
+  };
 
   const queryParams: TUserQuery = {
     page,
     limit: 10,
-    ...(debouncedValue ? {search : debouncedValue} :{}),
+    ...(debouncedValue ? { search: debouncedValue } : {}),
     ...(tab === 'ALL' ? {} : { isActive: tab }),
     ...(roleTab === 'ALL' ? {} : { role: roleTab }),
   };
-
- 
-  
 
   return (
     <div>
@@ -98,7 +92,7 @@ export function ManageUserTab() {
         </div>
       </div>
 
-      <Suspense fallback={<Skeleton />}>
+      <Suspense fallback={<SkeletonText />}>
         <UserManageTable {...queryParams} handleChangPage={setPage} />
       </Suspense>
     </div>

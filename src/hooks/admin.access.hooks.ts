@@ -1,26 +1,42 @@
-import { approvedStudent, approvedTeacher, getEnrollments, getResults, getStudents, getTeachers, getUsers } from '@/api/admin.access.api';
-import { TManageUser, TUserQuery } from '@/type/admin.access.type';
+import {
+  approvedStudent,
+  approvedTeacher,
+  getEnrollments,
+  getResults,
+  getStudents,
+  getTeachers,
+  getUsers,
+} from '@/api/admin.access.api';
+import {
+  TManageUser,
+  TUserQuery,
+  
+} from '@/type/addminAccess/admin.access.type';
+import { TApprovedStudent } from '@/type/addminAccess/student.approved';
+import { TApprovedTeacher } from '@/type/addminAccess/teacher.approved.type';
+import { IStudentQuery, ITeacherQuery } from '@/type/query.types';
+
 
 import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
-export const useGetUsers = (params:TUserQuery) => {
+export const useGetUsers = (params: TUserQuery) => {
   return useSuspenseQuery<TManageUser>({
-    queryKey: ['getUsers',params],
-    queryFn:() => getUsers(params),
+    queryKey: ['getUsers', params],
+    queryFn: () => getUsers(params),
   });
 };
 
-export const useGetTeacher = () => {
-  return useSuspenseQuery({
-    queryKey: ['getTeacher'],
-    queryFn: getTeachers,
+export const useGetTeacher = (params:ITeacherQuery) => {
+  return useSuspenseQuery<TApprovedTeacher>({
+    queryKey: ['getTeacher',params],
+    queryFn:()=> getTeachers(params),
   });
 };
 
-export const useGetStudent = () => {
-  return useSuspenseQuery({
-    queryKey: ['getTeacher'],
-    queryFn: getStudents,
+export const useGetStudent = (params :IStudentQuery) => {
+  return useSuspenseQuery<TApprovedStudent>({
+    queryKey: ['getTeacher',params],
+    queryFn:()=> getStudents(params),
   });
 };
 
@@ -37,20 +53,14 @@ export const useGetResults = () => {
   });
 };
 
-
-export const useApprovedTeacher =()=>{
+export const useApprovedTeacher = () => {
   return useMutation({
-    mutationFn:approvedTeacher
-  })
-}
+    mutationFn: approvedTeacher,
+  });
+};
 
-export const useApprovedStudent =()=>{
+export const useApprovedStudent = () => {
   return useMutation({
-    mutationFn:approvedStudent
-  })
-}
-
-
-
-
-
+    mutationFn: approvedStudent,
+  });
+};

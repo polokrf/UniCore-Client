@@ -1,10 +1,9 @@
-import { ManageUserTab } from "@/components/modules/adminDashboard/tabs/MangeUserTab";
-
+import { ManageUserTab } from '@/components/modules/adminDashboard/manageUser/MangeUserTab';
 
 const UsersPage = () => {
   return (
     <div>
-     <ManageUserTab/>
+      <ManageUserTab />
     </div>
   );
 };

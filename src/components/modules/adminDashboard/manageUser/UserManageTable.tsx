@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,21 +13,15 @@ import {
 } from '@/components/ui/table';
 import { TablePagination } from '@/components/ui/TablePagination';
 import { useGetUsers } from '@/hooks/admin.access.hooks';
-import { TUserGet, TUserQuery } from '@/type/admin.access.type';
+import { TUserGet, TUserQuery } from '@/type/addminAccess/admin.access.type';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
-
 
 interface Props extends TUserQuery {
   handleChangPage: Dispatch<SetStateAction<number>>;
 }
 
-
-
-export function UserManageTable({
-  handleChangPage,
-  ...queryParams
-}: Props){
+export function UserManageTable({ handleChangPage, ...queryParams }: Props) {
   // console.log(queryParams ,'query paramas')
   const { data } = useGetUsers(queryParams);
 

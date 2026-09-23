@@ -1,4 +1,4 @@
-import { IUserRole } from "./user.type";
+import { IUserRole } from "../user.type";
 
 export type TUserGet = {
   createdAt: string;
@@ -29,6 +29,12 @@ export type TManageUser = {
     meta: IMeta;
   };
 };
+
+
+
+
+
+
 
 
 export type TUserQuery={
