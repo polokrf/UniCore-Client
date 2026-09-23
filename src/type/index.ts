@@ -4,3 +4,4 @@ import * as user from './user.type.js';
 import * as routes from './route.type.js';
 import * as department from './depart.type.js';
 import * as applyStudent from './applyStudent . teacher.type.js';
+import * as adminAccess from './admin.access.type.js'

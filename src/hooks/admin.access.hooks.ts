@@ -1,11 +1,12 @@
 import { approvedStudent, approvedTeacher, getEnrollments, getResults, getStudents, getTeachers, getUsers } from '@/api/admin.access.api';
+import { TManageUser, TUserQuery } from '@/type/admin.access.type';
 
 import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
-export const useGetUsers = () => {
-  return useSuspenseQuery({
-    queryKey: ['getUsers'],
-    queryFn: getUsers,
+export const useGetUsers = (params:TUserQuery) => {
+  return useSuspenseQuery<TManageUser>({
+    queryKey: ['getUsers',params],
+    queryFn:() => getUsers(params),
   });
 };
 

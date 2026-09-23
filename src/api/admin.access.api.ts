@@ -1,7 +1,10 @@
 import apiFetch from "@/lib/apiFetch"
+import { TManageUser, TUserQuery } from "@/type/admin.access.type";
 
-export const getUsers = () => {
-  return apiFetch(`/api/admin/users`);
+export const getUsers = (params:TUserQuery) => {
+  return apiFetch<TManageUser>(`/api/admin/users`,{
+    params
+  });
 };
 
 export const getTeachers =()=>{

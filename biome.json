@@ -32,13 +32,16 @@
         "noUnusedFunctionParameters":"off"
       },
       "complexity":{
-       "noUselessUndefinedInitialization":"off"
+       "noUselessUndefinedInitialization":"off",
+       "noUselessFragments":"off"
       },
       "suspicious":{
-
+       "noArrayIndexKey":"off"
       },
       "a11y":{
-        "noLabelWithoutControl":"off"
+        "noLabelWithoutControl":"off",
+        "useSemanticElements":"off",
+        "noRedundantRoles":"off"
       }
     },
     "domains": {
